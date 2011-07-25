@@ -1,4 +1,3 @@
-
 {-# LANGUAGE TypeFamilies, FlexibleContexts, UndecidableInstances #-}
 module Data.Profunctor.Corepresentable 
   ( CorepresentableProfunctor(..) 
@@ -8,8 +7,8 @@ import Data.Functor
 import Data.Functor.Identity
 import Data.Profunctor
 import Control.Arrow
-import qualified Data.Profunctor.Composition as Profunctor
-import qualified Data.Functor.Compose as Functor
+import Data.Profunctor.Composition
+import Data.Functor.Compose
 
 class Functor (Corep k) => CorepresentableProfunctor k where
   type Corep k :: * -> *
@@ -31,7 +30,7 @@ instance Functor f => CorepresentableProfunctor (UpStar f) where
   cotabulatePro = UpStar
   coindexPro = runUpStar
 
-instance (CorepresentableProfunctor c, CorepresentableProfunctor d) => CorepresentableProfunctor (Profunctor.Compose c d) where
-  type Corep (Profunctor.Compose c d) = Functor.Compose (Corep c) (Corep d)
-  cotabulatePro f = Profunctor.Compose (cotabulatePro (Functor.getCompose . f)) (cotabulatePro id)
-  coindexPro (Profunctor.Compose f g) d = Functor.Compose $ coindexPro g <$> coindexPro f d
+instance (CorepresentableProfunctor c, CorepresentableProfunctor d) => CorepresentableProfunctor (Procompose c d) where
+  type Corep (Procompose c d) = Compose (Corep c) (Corep d)
+  cotabulatePro f = Procompose (cotabulatePro (getCompose . f)) (cotabulatePro id)
+  coindexPro (Procompose f g) d = Compose $ coindexPro g <$> coindexPro f d

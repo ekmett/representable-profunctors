@@ -5,9 +5,9 @@ module Data.Profunctor.Representable
 
 import Data.Functor
 import Data.Functor.Identity
-import qualified Data.Functor.Compose as Functor
+import Data.Functor.Compose
 import Data.Profunctor
-import qualified Data.Profunctor.Composition as Profunctor
+import Data.Profunctor.Composition
 import Control.Comonad
 
 class Functor (Rep k) => RepresentableProfunctor k where
@@ -30,7 +30,7 @@ instance Functor f => RepresentableProfunctor (DownStar f) where
   tabulatePro = DownStar
   indexPro = runDownStar
 
-instance (RepresentableProfunctor f, RepresentableProfunctor g) => RepresentableProfunctor (Profunctor.Compose f g) where
-  type Rep (Profunctor.Compose f g) = Functor.Compose (Rep g) (Rep f)
-  tabulatePro f = Profunctor.Compose (tabulatePro id) (tabulatePro (f . Functor.Compose))
-  indexPro (Profunctor.Compose f g) (Functor.Compose d) = indexPro g $ indexPro f <$> d
+instance (RepresentableProfunctor f, RepresentableProfunctor g) => RepresentableProfunctor (Procompose f g) where
+  type Rep (Procompose f g) = Compose (Rep g) (Rep f)
+  tabulatePro f = Procompose (tabulatePro id) (tabulatePro (f . Compose))
+  indexPro (Procompose f g) (Compose d) = indexPro g $ indexPro f <$> d
