@@ -1,13 +1,13 @@
 name:          representable-profunctors
 category:      Control, Categories
-version:       0.2.0
+version:       0.2.0.1
 license:       BSD3
 cabal-version: >= 1.6
 license-file:  LICENSE
 author:        Edward A. Kmett
 maintainer:    Edward A. Kmett <ekmett@gmail.com>
 stability:     experimental
-homepage:      git://github.com/ekmett/representable-profunctors/
+homepage:      http://github.com/ekmett/representable-profunctors/
 copyright:     Copyright (C) 2011 Edward A. Kmett
 synopsis:      Representable profunctors
 description:   Representable profunctors
