@@ -10,7 +10,7 @@ import Data.Profunctor
 import Data.Profunctor.Composition
 import Control.Comonad
 
-class Functor (Rep k) => RepresentableProfunctor k where
+class (Profunctor k, Functor (Rep k)) => RepresentableProfunctor k where
   type Rep k :: * -> *
   tabulatePro :: (Rep k d -> c) -> k d c
   indexPro :: k d c -> Rep k d -> c 

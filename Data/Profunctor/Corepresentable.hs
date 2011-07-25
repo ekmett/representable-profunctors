@@ -10,7 +10,7 @@ import Control.Arrow
 import Data.Profunctor.Composition
 import Data.Functor.Compose
 
-class Functor (Corep k) => CorepresentableProfunctor k where
+class (Profunctor k, Functor (Corep k)) => CorepresentableProfunctor k where
   type Corep k :: * -> *
   cotabulatePro :: (d -> Corep k c) -> k d c
   coindexPro :: k d c -> d -> Corep k c 
@@ -20,7 +20,7 @@ instance CorepresentableProfunctor (->) where
   cotabulatePro f = runIdentity . f
   coindexPro f = Identity . f 
 
-instance Functor m => CorepresentableProfunctor (Kleisli m) where
+instance (Monad m, Functor m) => CorepresentableProfunctor (Kleisli m) where
   type Corep (Kleisli m) = m
   cotabulatePro = Kleisli
   coindexPro = runKleisli 
