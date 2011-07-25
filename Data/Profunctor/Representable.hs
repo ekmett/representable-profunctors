@@ -1,11 +1,11 @@
-{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeFamilies, FlexibleContexts, UndecidableInstances #-}
 module Data.Profunctor.Representable 
   ( RepresentableProfunctor(..) 
   ) where
 
 import Data.Profunctor
 import Control.Comonad
-import Control.Monad.Identity
+import Data.Functor.Identity
 
 class Functor (Rep k) => RepresentableProfunctor k where
   type Rep k :: * -> *
@@ -14,7 +14,7 @@ class Functor (Rep k) => RepresentableProfunctor k where
   
 instance RepresentableProfunctor (->) where
   type Rep (->) = Identity
-  tabulatePro f = f . runIdentity
+  tabulatePro f = f . Identity
   indexPro f (Identity d) = f d
 
 instance Functor w => RepresentableProfunctor (Cokleisli w) where
@@ -22,7 +22,7 @@ instance Functor w => RepresentableProfunctor (Cokleisli w) where
   tabulatePro = Cokleisli
   indexPro = runCokleisli 
 
-instance Functor w => RepresentableProfunctor (DownStar f) where
+instance Functor f => RepresentableProfunctor (DownStar f) where
   type Rep (DownStar f) = f
   tabulatePro = DownStar
   indexPro = runDownStar

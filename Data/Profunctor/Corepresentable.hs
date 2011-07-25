@@ -1,11 +1,12 @@
-{-# LANGUAGE TypeFamilies #-}
+
+{-# LANGUAGE TypeFamilies, FlexibleContexts, UndecidableInstances #-}
 module Data.Profunctor.Corepresentable 
-  ( RepresentableProfunctor(..) 
+  ( CorepresentableProfunctor(..) 
   ) where
 
 import Data.Profunctor
 import Control.Arrow
-import Control.Monad.Identity
+import Data.Functor.Identity
 
 class Functor (Corep k) => CorepresentableProfunctor k where
   type Corep k :: * -> *
@@ -15,14 +16,14 @@ class Functor (Corep k) => CorepresentableProfunctor k where
 instance CorepresentableProfunctor (->) where
   type Corep (->) = Identity
   cotabulatePro f = runIdentity . f
-  indexPro f = Identity . f 
+  coindexPro f = Identity . f 
 
-instance Functor w => CorepresentableProfunctor (Kleisli w) where
-  type Rep (Kleisli m) = m
+instance Functor m => CorepresentableProfunctor (Kleisli m) where
+  type Corep (Kleisli m) = m
   cotabulatePro = Kleisli
   coindexPro = runKleisli 
 
-instance Functor w => CorepresentableProfunctor (UpStar f) where
-  type Rep (DownStar f) = f
+instance Functor f => CorepresentableProfunctor (UpStar f) where
+  type Corep (UpStar f) = f
   cotabulatePro = UpStar
   coindexPro = runUpStar
