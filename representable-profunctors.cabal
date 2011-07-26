@@ -1,8 +1,8 @@
 name:          representable-profunctors
 category:      Control, Categories
-version:       0.4.0
+version:       0.4.0.1
 license:       BSD3
-cabal-version: >= 1.6
+cabal-version: >= 1.10
 license-file:  LICENSE
 author:        Edward A. Kmett
 maintainer:    Edward A. Kmett <ekmett@gmail.com>
@@ -18,6 +18,12 @@ source-repository head
   location: git://github.com/ekmett/representable-profunctors.git
 
 library
+  default-language: Haskell2010
+  other-extensions: 
+    TypeFamilies 
+    FlexibleContexts
+    UndecidableInstances
+
   build-depends: 
     base >= 4 && < 5,
     comonad >= 1.1 && < 1.2,
