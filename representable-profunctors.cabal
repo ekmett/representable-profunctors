@@ -8,10 +8,12 @@ author:        Edward A. Kmett
 maintainer:    Edward A. Kmett <ekmett@gmail.com>
 stability:     experimental
 homepage:      http://github.com/ekmett/representable-profunctors/
+bug-reports:   http://github.com/ekmett/representable-profunctors/
 copyright:     Copyright (C) 2011 Edward A. Kmett
 synopsis:      Representable profunctors
 description:   Representable profunctors
 build-type:    Simple
+extra-source-files: .travis.yml
 
 source-repository head
   type: git
