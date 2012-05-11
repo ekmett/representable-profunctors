@@ -1,6 +1,6 @@
 name:          representable-profunctors
 category:      Control, Categories
-version:       0.4.2.2
+version:       0.4.2.3
 license:       BSD3
 cabal-version: >= 1.6
 license-file:  LICENSE
