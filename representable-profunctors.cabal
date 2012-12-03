@@ -1,6 +1,6 @@
 name:          representable-profunctors
 category:      Control, Categories
-version:       0.4.2.3
+version:       3.0
 license:       BSD3
 cabal-version: >= 1.6
 license-file:  LICENSE
@@ -9,7 +9,7 @@ maintainer:    Edward A. Kmett <ekmett@gmail.com>
 stability:     experimental
 homepage:      http://github.com/ekmett/representable-profunctors/
 bug-reports:   http://github.com/ekmett/representable-profunctors/
-copyright:     Copyright (C) 2011 Edward A. Kmett
+copyright:     Copyright (C) 2011-2012 Edward A. Kmett
 synopsis:      Representable profunctors
 description:   Representable profunctors
 build-type:    Simple
@@ -27,9 +27,9 @@ library
 
   build-depends:
     base              >= 4       && < 5,
-    comonad           >= 1.1.1.5 && < 1.2,
-    profunctors       >= 0.1.2.2 && < 0.2,
-    profunctor-extras >= 0.3.2.2 && < 0.4,
+    comonad           == 3.0.*,
+    profunctors       == 3.0.*,
+    profunctor-extras == 3.0.*,
     transformers      >= 0.2     && < 0.4
 
   exposed-modules:
